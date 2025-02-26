@@ -9,11 +9,11 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('admin.dashboard') }}">SaveSmart</a>
+            <a class="navbar-brand" href="{{ route('profiles.index') }}">SaveSmart</a>
             <ul class="navbar-nav ms-auto">
                 @auth
-                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('profiles.index') }}">Profils</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('profiles.index') }}">Dashboard</a></li>
+                    <!-- <li class="nav-item"><a class="nav-link" href="{{ route('profiles.index') }}">Profils</a></li> -->
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf

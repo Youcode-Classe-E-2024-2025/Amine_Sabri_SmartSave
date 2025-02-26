@@ -51,7 +51,8 @@ class AuthController extends Controller
 
     if (Auth::attempt($credentials)) {
         if (Auth::user()->role == 'admin') {
-            return redirect()->route('admin.dashboard')->with('success', 'Bienvenue Admin !');
+            
+            return redirect()->route('profiles.index')->with('success', 'Bienvenue Admin !');
         } else {
             return redirect()->route('dashboard')->with('success', 'Connexion réussie !');
         }
