@@ -26,3 +26,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
 });
+
+use App\Http\Controllers\ProfileController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profiles', [ProfileController::class, 'index'])->name('profiles.index');
+    Route::get('/profiles/create', [ProfileController::class, 'create'])->name('profiles.create');
+    Route::post('/profiles', [ProfileController::class, 'store'])->name('profiles.store');
+});
+Route::post('/profiles/{profile}/login', [ProfileController::class, 'loginToProfile'])->name('profiles.login');
