@@ -67,7 +67,7 @@ public function showUnlockForm(Profile $profile)
 
         if (Hash::check($request->password, $profile->password)) {
             Session::put('unlocked_profile', $profile->id);
-            return redirect()->route('profiles.home', $profile->id);
+            return redirect()->route('transactions.index', $profile->id);
         }
 
         return back()->with('error', 'Mot de passe incorrect.');

@@ -21,9 +21,10 @@ class TransactionController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request);
         $request->validate([
             'profile_id' => 'required|exists:profiles,id',
-            'type' => 'required|in:income,expense',
+            'type' => 'required|in:Revenu,Dépense',
             'amount' => 'required|numeric|min:0.01',
             'category' => 'required|string|max:255',
             'description' => 'nullable|string',
