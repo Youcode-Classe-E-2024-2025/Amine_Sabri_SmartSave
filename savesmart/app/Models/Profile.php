@@ -20,7 +20,7 @@ class Profile extends Model
     }
 
 
-    public function transactions()
+public function transactions()
 {
     return $this->hasMany(Transaction::class);
 }
