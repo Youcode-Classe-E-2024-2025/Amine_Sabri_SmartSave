@@ -15,12 +15,12 @@
             <a class="navbar-brand" href="{{ route('profiles.index') }}">SaveSmart</a>
             <ul class="navbar-nav ms-auto">
                 @auth
-                    <li class="nav-item"><a class="nav-link" href="{{ route('profiles.index') }}">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('profiles.index') }}">Home</a></li>
                     <!-- <li class="nav-item"><a class="nav-link" href="{{ route('profiles.index') }}">Profils</a></li> -->
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-danger">Déconnexion</button>
+                            <button type="submit" class="btn btn-danger"><i class="bi bi-box-arrow-right"></i></button>
                         </form>
                     </li>
                 @else
