@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::table('transactions', function (Blueprint $table) {
             $table->dropColumn('category');
 
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-
+            $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('cascade');
 
         });
     }
