@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->dropColumn('category');
-
+        Schema::create('transactions', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('profile_id')->constrained()->onDelete('cascade'); // Profil lié
+            $table->enum('type', ['Revenu', 'Dépense']); // Revenu ou Dépense
+            $table->decimal('amount', 10, 2); // Montant
             $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('cascade');
-
+            $table->timestamps();
         });
     }
 
@@ -24,10 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->string('category');
-            $table->dropForeign(['category_id']);
-            $table->dropColumn('category_id');
-        });
+        Schema::dropIfExists('transactions');
     }
 };

@@ -28,13 +28,3 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home/{profile}', [ProfileController::class, 'home'])->name('profiles.home');
 });
 // Route::post('/profiles/{profile}/login', [ProfileController::class, 'loginToProfile'])->name('profiles.login');
-
-
-
-use App\Http\Controllers\TransactionController;
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/profiles/{profile}/transactions', [TransactionController::class, 'index'])->name('transactions.index');
-    Route::get('/profiles/{profile}/transactions/create', [TransactionController::class, 'create'])->name('transactions.create');
-    Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
-});
