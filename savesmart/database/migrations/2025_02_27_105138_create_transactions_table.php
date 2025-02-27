@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('profile_id')->constrained()->onDelete('cascade'); // Profil lié
             $table->enum('type', ['Revenu', 'Dépense']); // Revenu ou Dépense
             $table->decimal('amount', 10, 2); // Montant
-            $table->string('category'); // Catégorie (ex: Nourriture, Transport)
+            $table->string('category'); 
             $table->string('description')->nullable(); // Détails
             $table->date('date'); // Date de transaction
             $table->timestamps();
