@@ -10,7 +10,7 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div class="p-4 bg-blue-100 text-blue-800 rounded-lg shadow">
                 <h3 class="text-lg font-semibold">Total Transactions</h3>
-                <p class="text-2xl font-bold">33</p>
+                <p class="text-2xl font-bold">{{ $totalAmount }}</p>
             </div>
             <div class="p-4 bg-green-100 text-green-800 rounded-lg shadow">
                 <h3 class="text-lg font-semibold">Total Revenus</h3>

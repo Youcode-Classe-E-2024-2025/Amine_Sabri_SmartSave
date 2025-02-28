@@ -12,8 +12,9 @@ class HomeController extends Controller
     public function index(Profile $profile){
         // dd($profile->id);
         $transactions = Transaction::where('profile_id',$profile->id)->get();
+        $totalAmount = Transaction::where('profile_id', $profile->id)->sum('amount');
         // dd($transactions);
         session(['current_profile'=>$profile->id]);
-        return view('home', compact('transactions'));
+        return view('home', compact('transactions','totalAmount'));
     }
 }
