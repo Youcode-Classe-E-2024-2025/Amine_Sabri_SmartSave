@@ -20,12 +20,17 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 
 
 
+use App\Http\Controllers\HomeController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profiles', [ProfileController::class, 'index'])->name('profiles.index');
     Route::get('/profiles/create', [ProfileController::class, 'create'])->name('profiles.create');
     Route::post('/profiles', [ProfileController::class, 'store'])->name('profiles.store');
+    Route::resource('categories', CategoryController::class);
+    Route::get('/home/{profile}', [HomeController::class, 'index'])->name('home');
 });
 
 
-Route::resource('categories', CategoryController::class);
+
+Route::resource('transactions', TransactionController::class);
+

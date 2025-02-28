@@ -31,7 +31,7 @@ class CategoryController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('categories.index')->with('success', 'Catégorie ajoutée avec succès!');
+        return redirect()->route('home',session('current_profile'))->with('success', 'Catégorie ajoutée avec succès!');
     }
 
     // Afficher le formulaire d’édition

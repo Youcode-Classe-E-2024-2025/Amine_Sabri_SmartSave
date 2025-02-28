@@ -1,32 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Ajouter une transaction</h2>
-    
+<div class="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
+    <h2 class="text-2xl font-bold mb-4">Nouvelle Transaction</h2>
+
     <form action="{{ route('transactions.store') }}" method="POST">
         @csrf
-        <div class="form-group">
-            <label for="type">Type de transaction</label>
-            <select name="type" id="type" class="form-control">
-                <option value="Revenu">Revenu</option>
-                <option value="Dépense">Dépense</option>
-            </select>
-        </div>
+        <label class="block mb-2">Type :</label>
+        <select name="type" class="w-full p-2 border rounded-md mb-4">
+            <option value="Revenu">Revenu</option>
+            <option value="Dépense">Dépense</option>
+        </select>
 
-        <div class="form-group">
-            <label for="amount">Montant</label>
-            <input type="number" name="amount" id="amount" class="form-control" required>
-        </div>
+        <label class="block mb-2">Montant :</label>
+        <input type="number" name="amount" class="w-full p-2 border rounded-md mb-4">
 
-        <div class="form-group">
-            <label for="category_id">Catégorie</label>
-            <select name="category_id" id="category_id" class="form-control">
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-        </div>
+        <label class="block mb-2">Catégorie :</label>
+        <select name="category_id" class="w-full p-2 border rounded-md mb-4">
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+        </select>
 
-        <button type="submit" class="btn btn-primary">Ajouter la transaction</button>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Ajouter</button>
     </form>
+</div>
 @endsection
