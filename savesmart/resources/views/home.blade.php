@@ -1,89 +1,319 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="max-w-6xl mx-auto p-6 bg-white shadow-md rounded-lg">
-        <h2 class="text-3xl font-bold mb-6 text-gray-800">Tableau de Bord - Admin</h2>
-        <a href="{{ route('categories.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mb-4 inline-block">Ajouter une catégorie</a>
-        <a href="{{ route('transactions.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md mb-4 inline-block">+ Nouvelle Transaction</a>
-
-        {{-- Statistiques principales --}}
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            <div class="p-4 bg-blue-100 text-blue-800 rounded-lg shadow">
-                <h3 class="text-lg font-semibold">Total Transactions</h3>
-                <p class="text-2xl font-bold">{{ $totalAmount }}</p>
+<div class="min-h-screen bg-gray-50">
+    <!-- Header Section -->
+    <div class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <h1 class="text-2xl font-bold text-gray-900">Tableau de Bord</h1>
+                <div class="flex space-x-3">
+                    <a href="{{ route('categories.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        Nouvelle Catégorie
+                    </a>
+                    <a href="{{ route('transactions.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                        <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        Nouvelle Transaction
+                    </a>
+                </div>
             </div>
-            <div class="p-4 bg-green-100 text-green-800 rounded-lg shadow">
-                <h3 class="text-lg font-semibold">Total Revenus</h3>
-                <p class="text-2xl font-bold">33 MAD</p>
-            </div>
-            <div class="p-4 bg-red-100 text-red-800 rounded-lg shadow">
-                <h3 class="text-lg font-semibold">Total Dépenses</h3>
-                <p class="text-2xl font-bold">33 MAD</p>
-            </div>
-            <div class="p-4 bg-purple-100 text-purple-800 rounded-lg shadow">
-                <h3 class="text-lg font-semibold">Nombre de Transactions</h3>
-                <p class="text-2xl font-bold">33</p>
-            </div>
-        </div>
-
-        {{-- Graphiques --}}
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="p-4 bg-gray-100 rounded-lg shadow">
-                <h3 class="text-lg font-semibold mb-2">Répartition Revenus vs Dépenses</h3>
-                <canvas id="pieChart"></canvas>
-            </div>
-            <div class="p-4 bg-gray-100 rounded-lg shadow">
-                <h3 class="text-lg font-semibold mb-2">Évolution des Transactions (Mensuel)</h3>
-                <canvas id="barChart"></canvas>
-            </div>
-        </div>
-
-        {{-- Liste des transactions récentes --}}
-        <div class="mt-6 p-4 bg-white rounded-lg shadow">
-            <h3 class="text-lg font-semibold mb-4">Transactions récentes</h3>
-            <table class="w-full border-collapse border border-gray-300">
-                <thead class="bg-gray-100">
-                    <tr>
-                        <th class="p-3 border">Type</th>
-                        <th class="p-3 border">Montant</th>
-                        <th class="p-3 border">Catégorie</th>
-                        <th class="p-3 border">Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($transactions as $transaction)
-                        <tr class="border">
-                            <td class="p-3 border text-center font-semibold 
-                                {{ $transaction->type === 'Revenu' ? 'text-green-600' : 'text-red-600' }}">
-                                {{ $transaction->type }}
-                            </td>
-                            <td class="p-3 border text-center">{{ number_format($transaction->amount, 2) }} MAD</td>
-                            <td class="p-3 border text-center">{{ $transaction->category->name ?? 'Non catégorisé' }}</td>
-                            <td class="p-3 border text-center">{{ $transaction->created_at }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
         </div>
     </div>
 
-    {{-- Script pour les graphiques avec Chart.js --}}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Graphique en Pie Chart
-        const ctxPie = document.getElementById('pieChart').getContext('2d');
-        new Chart(ctxPie, {
-            type: 'pie',
-            data: {
-                labels: ['Revenus', 'Dépenses'],
-                datasets: [{
-                    data: [22, 44],
-                    backgroundColor: ['#10B981', '#EF4444']
-                }]
-            }
-        });
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="bg-white overflow-hidden shadow rounded-lg h-fit">
+                <div class="px-4 py-4 sm:p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
+                            <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Total Transactions</dt>
+                                <dd class="flex items-baseline">
+                                    <div class="text-2xl font-semibold text-gray-900">{{ $totalAmount }}</div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        // Graphique en Bar Chart
-        
-    </script>
+            <div class="bg-white overflow-hidden shadow rounded-lg h-fit">
+                <div class="px-4 py-4 sm:p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-green-500 rounded-md p-3">
+                            <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Total Revenus</dt>
+                                <dd class="flex items-baseline">
+                                    <div class="text-2xl font-semibold text-gray-900">33 </div>
+                                    <div class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
+                                        <svg class="self-center flex-shrink-0 h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="sr-only">Augmentation de</span>
+                                        12%
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white overflow-hidden shadow rounded-lg h-fit">
+                <div class="px-4 py-4 sm:p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-red-500 rounded-md p-3">
+                            <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Total Dépenses</dt>
+                                <dd class="flex items-baseline">
+                                    <div class="text-2xl font-semibold text-gray-900">22 </div>
+                                    <div class="ml-2 flex items-baseline text-sm font-semibold text-red-600">
+                                        <svg class="self-center flex-shrink-0 h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="sr-only">Diminution de</span>
+                                        5%
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white overflow-hidden shadow rounded-lg h-fit">
+                <div class="px-4 py-3 sm:p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-purple-500 rounded-md p-3">
+                            <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Dernière Transaction</dt>
+                                <dd class=" items-baseline">
+                                    <div class="text-2xl font-semibold text-gray-900">{{ $lastTransaction->amount }}</div>
+                                    <span class="text-[12px] text-gray-600">Par: {{ $lastTransaction->profile->name }}</span>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="bg-gray-50 px-4 py-4 sm:px-6">
+                    <div class="text-sm">
+                        <span class="font-medium text-gray-600">Par: {{ $lastTransaction->profile->name }}</span>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">Répartition Revenus vs Dépenses</h3>
+                    <div class="mt-4 h-64">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">Évolution des Transactions (Mensuel)</h3>
+                    <div class="mt-4 h-64">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Transactions Table -->
+        <div class="mt-8 bg-white shadow overflow-hidden sm:rounded-lg">
+            <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
+                <div>
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">Transactions récentes</h3>
+                    <p class="mt-1 max-w-2xl text-sm text-gray-500">Liste des dernières transactions effectuées</p>
+                </div>
+                <div>
+                    <select class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                        <option>Tous les types</option>
+                        <option>Revenus</option>
+                        <option>Dépenses</option>
+                    </select>
+                </div>
+            </div>
+            <div class="border-t border-gray-200">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Montant</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Catégorie</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach ($transactions as $transaction)
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $transaction->type === 'Revenu' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                        {{ $transaction->type }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    {{ number_format($transaction->amount, 2) }} MAD
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {{ $transaction->category->name ?? 'Non catégorisé' }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {{ $transaction->created_at }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900 mr-3">Voir</a>
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Modifier</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
+                    <div class="flex justify-between items-center">
+                        <div class="text-sm text-gray-700">
+                            Affichage de <span class="font-medium">1</span> à <span class="font-medium">10</span> sur <span class="font-medium">20</span> transactions
+                        </div>
+                        <div class="flex-1 flex justify-end">
+                            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                Précédent
+                            </a>
+                            <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                Suivant
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts pour les graphiques -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Configuration des couleurs
+    const colors = {
+        primary: '#6366F1',
+        success: '#10B981',
+        danger: '#EF4444',
+        warning: '#F59E0B',
+        info: '#3B82F6',
+        purple: '#8B5CF6'
+    };
+
+    // Graphique en Pie Chart
+    const ctxPie = document.getElementById('pieChart').getContext('2d');
+    new Chart(ctxPie, {
+        type: 'doughnut',
+        data: {
+            labels: ['Revenus', 'Dépenses'],
+            datasets: [{
+                data: [33, 22],
+                backgroundColor: [colors.success, colors.danger],
+                borderColor: ['#FFFFFF', '#FFFFFF'],
+                borderWidth: 2,
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        usePointStyle: true,
+                        padding: 20
+                    }
+                }
+            },
+            cutout: '70%'
+        }
+    });
+
+    // Graphique en Bar Chart
+    const ctxBar = document.getElementById('barChart').getContext('2d');
+    new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'],
+            datasets: [
+                {
+                    label: 'Revenus',
+                    data: [12, 19, 3, 5, 2, 3, 8, 14, 10, 15, 9, 33],
+                    backgroundColor: colors.success,
+                    borderRadius: 4
+                },
+                {
+                    label: 'Dépenses',
+                    data: [7, 11, 5, 8, 3, 7, 9, 12, 16, 4, 6, 22],
+                    backgroundColor: colors.danger,
+                    borderRadius: 4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        usePointStyle: true,
+                        padding: 20
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        borderDash: [2, 4]
+                    }
+                }
+            }
+        }
+    });
+</script>
 @endsection
+

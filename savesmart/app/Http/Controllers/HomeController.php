@@ -13,8 +13,9 @@ class HomeController extends Controller
         // dd($profile->id);
         $transactions = Transaction::where('profile_id',$profile->id)->get();
         $totalAmount = Transaction::where('profile_id', $profile->id)->sum('amount');
+        $lastTransaction = Transaction::where('profile_id', $profile->id)->latest()->first();
         // dd($transactions);
         session(['current_profile'=>$profile->id]);
-        return view('home', compact('transactions','totalAmount'));
+        return view('home', compact('transactions','totalAmount','lastTransaction'));
     }
 }
