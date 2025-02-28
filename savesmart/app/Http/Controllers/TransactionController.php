@@ -2,39 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaction;
-use App\Models\Profile;
-use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\Transaction;
+use App\Models\Category;
+// use App\Models\Profile;
+
 class TransactionController extends Controller
 {
-    public function index(Profile $profile)
+    // Afficher le formulaire pour créer une transaction
+    public function create()
     {
-        $transactions = $profile->transactions()->with('category')->get();
-        return view('transactions.index', compact('profile', 'transactions'));
+        $categories = Category::all(); // Récupérer toutes les catégories
+        return view('transactions.create', compact('categories'));
     }
 
-    public function create(Profile $profile)
-    {
-        $categories = Category::all();
-        return view('transactions.create', compact('profile', 'categories'));
-    }
-
-    public function store(Request $request, Profile $profile)
+    // Enregistrer la transaction
+    public function store(Request $request)
     {
         $request->validate([
-            'type' => 'required|in:Revenu,Dépense',
+            'type' => 'required',
             'amount' => 'required|numeric|min:0',
             'category_id' => 'nullable|exists:categories,id',
         ]);
 
+        // Associer la transaction au profil connecté
         Transaction::create([
-            'profile_id' => $profile->id,
+            'profile_id' => auth()->user()->profiles()->first()->id, // Sélectionner le premier profil de l'utilisateur
             'type' => $request->type,
             'amount' => $request->amount,
             'category_id' => $request->category_id,
         ]);
 
-        return redirect()->route('transactions.index', $profile->id);
+        return redirect()->route('profiles.index')->with('success', 'Transaction ajoutée avec succès!');
     }
 }

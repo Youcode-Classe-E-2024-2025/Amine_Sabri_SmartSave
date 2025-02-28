@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
 
 
 
@@ -23,8 +25,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profiles', [ProfileController::class, 'index'])->name('profiles.index');
     Route::get('/profiles/create', [ProfileController::class, 'create'])->name('profiles.create');
     Route::post('/profiles', [ProfileController::class, 'store'])->name('profiles.store');
-    Route::get('/profiles/{profile}/unlock', [ProfileController::class, 'showUnlockForm'])->name('profiles.unlock');
-    Route::post('/profiles/{profile}/unlock', [ProfileController::class, 'unlockProfile'])->name('profiles.unlock.post');
-    Route::get('/home/{profile}', [ProfileController::class, 'home'])->name('profiles.home');
 });
-// Route::post('/profiles/{profile}/login', [ProfileController::class, 'loginToProfile'])->name('profiles.login');
+
+
+Route::resource('categories', CategoryController::class);

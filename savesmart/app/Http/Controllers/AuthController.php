@@ -50,7 +50,7 @@ class AuthController extends Controller
     ]);
 
     if (Auth::attempt($credentials)) {
-        if (Auth::user()->role == 'admin') {
+        if (Auth::user()->role == 'user') {
             
             return redirect()->route('profiles.index')->with('success', 'Bienvenue Admin !');
         } else {
