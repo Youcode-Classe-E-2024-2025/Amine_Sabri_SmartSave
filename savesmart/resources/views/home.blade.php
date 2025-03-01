@@ -195,28 +195,27 @@
                                     {{ $transaction->created_at }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900 mr-3">Voir</a>
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Modifier</a>
+                                    <!-- Lien de modification -->
+                                    <a href="{{ route('transactions.edit', $transaction->id) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">
+                                        Modifier
+                                    </a>
+
+                                    <!-- Formulaire pour suppression -->
+                                    <form action="{{ route('transactions.destroy', $transaction->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('Voulez-vous vraiment supprimer cette transaction ?');">
+                                            Supprimer
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-                <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
-                    <div class="flex justify-between items-center">
-                        <div class="text-sm text-gray-700">
-                            Affichage de <span class="font-medium">1</span> à <span class="font-medium">10</span> sur <span class="font-medium">20</span> transactions
-                        </div>
-                        <div class="flex-1 flex justify-end">
-                            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                                Précédent
-                            </a>
-                            <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                                Suivant
-                            </a>
-                        </div>
-                    </div>
+                <div class="m-3">
+                    {{ $transactions->links() }}
                 </div>
             </div>
         </div>

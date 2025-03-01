@@ -43,39 +43,48 @@ class TransactionController extends Controller
     }
 
     public function edit(Transaction $transaction)
-    {
-        if ($transaction->profile->user_id !== Auth::id()) {
-            abort(403);
-        }
-
-        $categories = Category::all();
-        return view('transactions.edit', compact('transaction', 'categories'));
+{
+    // Vérifier si l'utilisateur a le droit de modifier cette transaction
+    if ($transaction->profile_id !== session('current_profile')) {
+        return redirect()->route('home', session('current_profile'))->with('error', 'Accès non autorisé.');
     }
 
-    public function update(Request $request, Transaction $transaction)
-    {
-        if ($transaction->profile->user_id !== Auth::id()) {
-            abort(403);
-        }
+    $categories = Category::all(); // Récupérer toutes les catégories
+    return view('transactions.edit', compact('transaction', 'categories'));
+}
 
-        $request->validate([
-            'type' => 'required|in:Revenu,Dépense',
-            'amount' => 'required|numeric|min:0.01',
-            'category_id' => 'nullable|exists:categories,id'
-        ]);
-
-        $transaction->update($request->all());
-
-        return redirect()->route('transactions.index')->with('success', 'Transaction mise à jour.');
+public function update(Request $request, Transaction $transaction)
+{
+    // Vérifier l'accès
+    if ($transaction->profile_id !== session('current_profile')) {
+        return redirect()->route('home', session('current_profile'))->with('error', 'Accès non autorisé.');
     }
 
-    public function destroy(Transaction $transaction)
-    {
-        if ($transaction->profile->user_id !== Auth::id()) {
-            abort(403);
-        }
+    $request->validate([
+        'type' => 'required|in:Revenu,Dépense',
+        'amount' => 'required|numeric|min:0.01',
+        'category_id' => 'nullable|exists:categories,id'
+    ]);
 
-        $transaction->delete();
-        return redirect()->route('transactions.index')->with('success', 'Transaction supprimée.');
+    $transaction->update([
+        'type' => $request->type,
+        'amount' => $request->amount,
+        'category_id' => $request->category_id
+    ]);
+
+    return redirect()->route('home', session('current_profile'))->with('success', 'Transaction mise à jour avec succès.');
+}
+
+public function destroy(Transaction $transaction)
+{
+    // Vérifier l'accès
+    if ($transaction->profile_id !== session('current_profile')) {
+        return redirect()->route('home', session('current_profile'))->with('error', 'Accès non autorisé.');
     }
+
+    $transaction->delete();
+
+    return redirect()->route('home', session('current_profile'))->with('success', 'Transaction supprimée avec succès.');
+}
+
 }

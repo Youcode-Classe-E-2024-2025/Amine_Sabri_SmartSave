@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index(Profile $profile){
         // dd($profile->id);
-        $transactions = Transaction::where('profile_id',$profile->id)->get();
+        $transactions = Transaction::where('profile_id',$profile->id)->paginate(1);;
         $totalAmount = Transaction::where('profile_id', $profile->id)->sum('amount');
         $lastTransaction = Transaction::where('profile_id', $profile->id)->latest()->first();
         // dd($transactions);
