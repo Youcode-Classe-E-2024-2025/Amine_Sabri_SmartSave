@@ -114,18 +114,13 @@
                             <dl>
                                 <dt class="text-sm font-medium text-gray-500 truncate">Dernière Transaction</dt>
                                 <dd class=" items-baseline">
-                                    <div class="text-2xl font-semibold text-gray-900">{{ $lastTransaction->amount }}</div>
-                                    <span class="text-[12px] text-gray-600">Par: {{ $lastTransaction->profile->name }}</span>
+                                    <div class="text-2xl font-semibold text-gray-900">{{ $lastTransaction->amount ?? '' }}</div>
+                                    <span class="text-[12px] text-gray-600">Par: {{ $lastTransaction->profile->name ?? ''}}</span>
                                 </dd>
                             </dl>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="bg-gray-50 px-4 py-4 sm:px-6">
-                    <div class="text-sm">
-                        <span class="font-medium text-gray-600">Par: {{ $lastTransaction->profile->name }}</span>
-                    </div>
-                </div> -->
             </div>
         </div>
 
