@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 py-10">
+<body class="bg-gray-100 py-10 mt-10">
     <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
         <h2 class="text-2xl font-semibold text-gray-700 mb-6 text-center">Connexion</h2>
         <form method="POST" action="{{ route('login') }}">
@@ -20,6 +20,10 @@
             </div>
             <button type="submit" class="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400">Se connecter</button>
         </form>
+        <p class="mt-4 text-center text-gray-600">
+            Pas encore de compte ? 
+            <a href="{{ route('register') }}" class="text-blue-600 hover:underline">S'inscrire</a>
+        </p>
     </div>
 </body>
 </html>
