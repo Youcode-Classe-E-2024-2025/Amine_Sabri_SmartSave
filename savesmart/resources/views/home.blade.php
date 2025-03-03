@@ -114,7 +114,7 @@
                             <dl>
                                 <dt class="text-sm font-medium text-gray-500 truncate">Dernière Transaction</dt>
                                 <dd class=" items-baseline">
-                                    <div class="text-2xl font-semibold text-gray-900">{{ $lastTransaction->amount ?? '' }}</div>
+                                    <div class="text-2xl font-semibold text-gray-900">{{ $lastTransaction->amount ?? 0 }}</div>
                                     <span class="text-[12px] text-gray-600">Par: {{ $lastTransaction->profile->name ?? ''}}</span>
                                 </dd>
                             </dl>
