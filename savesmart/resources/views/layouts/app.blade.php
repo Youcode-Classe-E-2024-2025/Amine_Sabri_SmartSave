@@ -10,17 +10,17 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-blue-600">
         <div class="container">
             <a class="navbar-brand" href="{{ route('profiles.index') }}">SaveSmart</a>
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav flex items-center">
                 @auth
-                    <li class="nav-item"><a class="nav-link" href="{{ route('profiles.index') }}">Home</a></li>
+                    <li class="nav-item px-2"><a class="nav-link text-white" href="{{ route('profiles.index') }}">Home</a></li>
                     <!-- <li class="nav-item"><a class="nav-link" href="{{ route('profiles.index') }}">Profils</a></li> -->
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-danger"><i class="bi bi-box-arrow-right"></i></button>
+                            <button type="submit" class="text-white border-2 border-white p-1 rounded"><i class="bi bi-box-arrow-right"></i>Déconnexion</button>
                         </form>
                     </li>
                 @else
