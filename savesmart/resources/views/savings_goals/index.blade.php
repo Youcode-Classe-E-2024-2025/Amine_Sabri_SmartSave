@@ -76,7 +76,7 @@
                                 <div class="text-sm text-gray-900">{{ number_format($goal->saved_amount, 2) }} MAD</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $goal->deadline ? $goal->deadline->format('d/m/Y') : 'Pas de date' }}</div>
+                                <div class="text-sm text-gray-900">{{ $goal->deadline ? $goal->deadline : 'Pas de date' }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @php
