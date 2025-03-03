@@ -58,18 +58,34 @@
                             </div>
                         </div>
                         <input type="hidden" value="{{ session('current_profile') }}" name="profile_id" id="profile_id"  required>
-
-                        <div>
-                            <label for="target_amount" class="block text-sm font-medium text-gray-700">
-                                Montant objectif
-                            </label>
-                            <div class="mt-1 relative rounded-md shadow-sm">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <span class="text-gray-500 sm:text-sm">MAD</span>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label for="target_amount" class="block text-sm font-medium text-gray-700">
+                                    Montant objectif
+                                </label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500 sm:text-sm">MAD</span>
+                                    </div>
+                                    <input type="number" name="target_amount" id="target_amount" class="focus:ring-indigo-500 border-2 border-black-500 py-2 focus:border-indigo-500 block w-full pl-12 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0.00" step="0.01" required>
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500 sm:text-sm">DH</span>
+                                    </div>
                                 </div>
-                                <input type="number" name="target_amount" id="target_amount" class="focus:ring-indigo-500 border-2 border-black-500 py-2 focus:border-indigo-500 block w-full pl-12 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0.00" step="0.01" required>
-                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                    <span class="text-gray-500 sm:text-sm">DH</span>
+                            </div>
+    
+                            <div>
+                                <label for="target_amount" class="block text-sm font-medium text-gray-700">
+                                    Montant objectif
+                                </label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500 sm:text-sm">MAD</span>
+                                    </div>
+                                    <input type="number" name="saved_amount" id="saved_amount" class="focus:ring-indigo-500 border-2 border-black-500 py-2 focus:border-indigo-500 block w-full pl-12 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0.00" step="0.01" required>
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500 sm:text-sm">DH</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
