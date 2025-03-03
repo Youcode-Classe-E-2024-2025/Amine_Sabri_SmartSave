@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SavingsGoalController;
 
 
 
@@ -33,4 +34,4 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::resource('transactions', TransactionController::class);
-
+Route::resource('savings_goals', SavingsGoalController::class);
