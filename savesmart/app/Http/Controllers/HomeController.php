@@ -13,8 +13,10 @@ class HomeController extends Controller
         // dd($profile->id);
         $transactions = Transaction::paginate(5);
         // $transactions = Transaction::where('profile_id',$profile->id)->paginate(5);
-        $totalAmount = Transaction::where('profile_id', $profile->id)->sum('amount');
-        $lastTransaction = Transaction::where('profile_id', $profile->id)->latest()->first();
+        $totalAmount = Transaction::sum('amount');
+        // $totalAmount = Transaction::where('profile_id', $profile->id)->sum('amount');
+        $lastTransaction = Transaction::latest()->first();
+        // $lastTransaction = Transaction::where('profile_id', $profile->id)->latest()->first();
         // dd($transactions);
         session(['current_profile'=>$profile->id]);
         return view('home', compact('transactions','totalAmount','lastTransaction'));

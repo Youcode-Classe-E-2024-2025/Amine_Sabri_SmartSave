@@ -20,6 +20,12 @@
                         </svg>
                         Nouvelle Transaction
                     </a>
+                    <a href="{{ route('transactions.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                        <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        Nouvelle Goal
+                    </a>
                 </div>
             </div>
         </div>
@@ -27,7 +33,7 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- Stats Cards -->
-        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             <div class="bg-white overflow-hidden shadow rounded-lg h-fit">
                 <div class="px-4 py-4 sm:p-6">
                     <div class="flex items-center">
@@ -48,7 +54,7 @@
                 </div>
             </div>
 
-            <div class="bg-white overflow-hidden shadow rounded-lg h-fit">
+            <!-- <div class="bg-white overflow-hidden shadow rounded-lg h-fit">
                 <div class="px-4 py-4 sm:p-6">
                     <div class="flex items-center">
                         <div class="flex-shrink-0 bg-green-500 rounded-md p-3">
@@ -73,7 +79,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="bg-white overflow-hidden shadow rounded-lg h-fit">
                 <div class="px-4 py-4 sm:p-6">
@@ -85,15 +91,11 @@
                         </div>
                         <div class="ml-5 w-0 flex-1">
                             <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">Total Dépenses</dt>
+                                <dt class="text-sm font-medium text-gray-500 truncate">objectifs financiers</dt>
                                 <dd class="flex items-baseline">
                                     <div class="text-2xl font-semibold text-gray-900">22 </div>
                                     <div class="ml-2 flex items-baseline text-sm font-semibold text-red-600">
-                                        <svg class="self-center flex-shrink-0 h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                                            <path fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                        </svg>
-                                        <span class="sr-only">Diminution de</span>
-                                        5%
+                                     
                                     </div>
                                 </dd>
                             </dl>
