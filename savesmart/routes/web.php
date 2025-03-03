@@ -27,6 +27,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profiles', [ProfileController::class, 'index'])->name('profiles.index');
     Route::get('/profiles/create', [ProfileController::class, 'create'])->name('profiles.create');
     Route::post('/profiles', [ProfileController::class, 'store'])->name('profiles.store');
+    Route::get('/profiles/{profile}/edit', [ProfileController::class, 'edit'])->name('profiles.edit'); // Formulaire d'édition
+    Route::put('/profiles/{profile}', [ProfileController::class, 'update'])->name('profiles.update'); // Mise à jour du profil
+    Route::delete('/profiles/{profile}', [ProfileController::class, 'destroy'])->name('profiles.destroy'); // Suppression du profil
     Route::resource('categories', CategoryController::class);
     Route::get('/home/{profile}', [HomeController::class, 'index'])->name('home');
 });
