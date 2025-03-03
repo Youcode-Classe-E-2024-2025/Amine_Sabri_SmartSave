@@ -6,8 +6,8 @@
         @foreach ($profiles as $profile)
         <li class="flex items-center flex-col w-fit  p-4 rounded-lg mt-10 relative">
             <a href="{{ route('home', $profile->id) }}" class="text-lg font-semibold text-black hover:underline flex items-center flex-col">
-                <img src="https://picsum.photos/100/100" alt="Profile" class="w-[100px] rounded-[50%]  ">
-                {{ substr($profile->name, 0, 3) }}
+                <img src="https://picsum.photos/100/100" alt="Profile" class="w-[100px] rounded-[50%] border-4 border-gray-500  ">
+                {{ substr($profile->name, 0, 6) }}
             </a>
             <a href="{{ route('profiles.edit', $profile->id) }}" class="absolute left-24 text-blue-800">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -25,6 +25,6 @@
             </form>
         </li>
         @endforeach
-        <a class = "mt-3" href="{{ route('profiles.create') }}"><i class="bi bi-plus-lg text-7xl rounded"></i></a>
+        <a class = "mt-3" href="{{ route('profiles.create') }}"><i class="bi bi-plus-lg text-7xl rounded-[50%] px-3 border-4 border-gray-500"></i></a>
     </ul>
 @endsection
