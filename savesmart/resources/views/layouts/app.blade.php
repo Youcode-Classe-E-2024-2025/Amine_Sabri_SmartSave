@@ -16,6 +16,7 @@
             <ul class="navbar-nav flex items-center">
                 @auth
                     <li class="nav-item px-2"><a class="nav-link text-white" href="{{ route('profiles.index') }}">Home</a></li>
+                    <li class="nav-item px-2"><a class="nav-link text-white" href="{{ route('profiles.index') }}">Profile personnel</a></li>
                     <!-- <li class="nav-item"><a class="nav-link" href="{{ route('profiles.index') }}">Profils</a></li> -->
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST">
