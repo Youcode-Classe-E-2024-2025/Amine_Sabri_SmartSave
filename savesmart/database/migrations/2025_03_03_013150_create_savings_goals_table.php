@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('savings_goals', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('profile_id')->constrained('profiles')->onDelete('cascade');
+            $table->string('name');
+            $table->decimal('target_amount', 10, 2);
+            $table->decimal('saved_amount', 10, 2)->default(0);
+            $table->date('deadline')->nullable();
             $table->timestamps();
         });
     }
