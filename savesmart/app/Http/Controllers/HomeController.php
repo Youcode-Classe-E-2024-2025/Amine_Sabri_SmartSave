@@ -20,7 +20,8 @@ class HomeController extends Controller
         // $lastTransaction = Transaction::where('profile_id', $profile->id)->latest()->first();
         // dd($transactions);
 
-        $objectifinanciers = SavingsGoal::latest()->first();
+        // $objectifinanciers = SavingsGoal::latest()->first();
+        $objectifinanciers = SavingsGoal::oldest()->first();
         session(['current_profile'=>$profile->id]);
         return view('home', compact('transactions','totalAmount','lastTransaction','objectifinanciers'));
     }
