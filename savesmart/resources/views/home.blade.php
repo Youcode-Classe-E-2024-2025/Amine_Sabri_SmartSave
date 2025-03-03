@@ -65,7 +65,7 @@
                             <dl>
                                 <dt class="text-sm font-medium text-gray-500 truncate">objectifs financiers</dt>
                                 <dd class="flex items-baseline">
-                                    <div class="text-2xl font-semibold text-gray-900">22 </div>
+                                    <div class="text-2xl font-semibold text-gray-900">{{ $objectifinanciers->target_amount }} </div>
                                     <div class="ml-2 flex items-baseline text-sm font-semibold text-red-600">
                                      
                                     </div>
@@ -211,9 +211,9 @@
     new Chart(ctxPie, {
         type: 'doughnut',
         data: {
-            labels: ['Revenus', 'Dépenses'],
+            labels: ['Revenus', 'Objectif'],
             datasets: [{
-                data: [33, 22],
+                data: [{{ $objectifinanciers->target_amount }}, {{ $totalAmount }}],
                 backgroundColor: [colors.success, colors.danger],
                 borderColor: ['#FFFFFF', '#FFFFFF'],
                 borderWidth: 2,
@@ -250,7 +250,7 @@
                     borderRadius: 4
                 },
                 {
-                    label: 'Dépenses',
+                    label: 'Objectif',
                     data: [7, 11, 5, 8, 3, 7, 9, 12, 16, 4, 6, 22],
                     backgroundColor: colors.danger,
                     borderRadius: 4
