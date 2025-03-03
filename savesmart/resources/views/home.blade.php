@@ -102,7 +102,7 @@
         <div class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
             <div class="bg-white overflow-hidden shadow rounded-lg">
                 <div class="px-4 py-5 sm:p-6">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">Répartition Revenus vs Dépenses</h3>
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">Répartition Saving vs Objectif</h3>
                     <div class="mt-4 h-64">
                         <canvas id="pieChart"></canvas>
                     </div>
@@ -211,9 +211,9 @@
     new Chart(ctxPie, {
         type: 'doughnut',
         data: {
-            labels: ['Revenus', 'Objectif'],
+            labels: ['Saving', 'Objectif'],
             datasets: [{
-                data: [{{ $objectifinanciers->target_amount }}, {{ $totalAmount }}],
+                data: [{{ $totalAmount }}, {{ $objectifinanciers->target_amount }}],
                 backgroundColor: [colors.success, colors.danger],
                 borderColor: ['#FFFFFF', '#FFFFFF'],
                 borderWidth: 2,
@@ -250,7 +250,7 @@
                     borderRadius: 4
                 },
                 {
-                    label: 'Objectif',
+                    label: 'Dépenses',
                     data: [7, 11, 5, 8, 3, 7, 9, 12, 16, 4, 6, 22],
                     backgroundColor: colors.danger,
                     borderRadius: 4
