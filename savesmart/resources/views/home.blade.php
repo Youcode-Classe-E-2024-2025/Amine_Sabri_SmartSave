@@ -121,7 +121,7 @@
 
         <!-- Recent Transactions Table -->
         <div class="mt-8 bg-white shadow overflow-hidden sm:rounded-lg">
-            <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
+            <!-- <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
                 <div>
                     <h3 class="text-lg leading-6 font-medium text-gray-900">Transactions récentes</h3>
                     <p class="mt-1 max-w-2xl text-sm text-gray-500">Liste des dernières transactions effectuées</p>
@@ -133,7 +133,7 @@
                         <option>Dépenses</option>
                     </select>
                 </div>
-            </div>
+            </div> -->
             <div class="border-t border-gray-200">
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
