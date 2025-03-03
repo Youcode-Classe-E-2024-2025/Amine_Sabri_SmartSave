@@ -26,7 +26,7 @@ class HomeController extends Controller
     }
 
     public function affiche(Profile $profile){
-        $goals = SavingsGoal::paginate(5);
+        $goals = SavingsGoal::where('profile_id',$profile->id)->paginate(5);
         session(['current_profile'=>$profile->id]);
         return view('profilPersonnel', compact('goals'));
     }

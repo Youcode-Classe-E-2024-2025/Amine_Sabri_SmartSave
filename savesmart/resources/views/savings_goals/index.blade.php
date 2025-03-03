@@ -58,9 +58,9 @@
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Progrès
                         </th>
-                        <th scope="col" class="relative px-6 py-3">
+                        <!-- <th scope="col" class="relative px-6 py-3">
                             <span class="sr-only">Actions</span>
-                        </th>
+                        </th> -->
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -89,7 +89,7 @@
                                     <span class="ml-2 text-sm font-medium text-gray-700">{{ number_format($percentage, 1) }}%</span>
                                 </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <!-- <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <a href="{{ route('savings_goals.show', $goal->id) }}" class="text-indigo-600 hover:text-indigo-900 mr-2">Voir</a>
                                 <a href="{{ route('savings_goals.edit', $goal->id) }}" class="text-yellow-600 hover:text-yellow-900 mr-2">Modifier</a>
                                 <form action="{{ route('savings_goals.destroy', $goal->id) }}" method="POST" class="inline-block">
@@ -97,7 +97,7 @@
                                     @method('DELETE')
                                     <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('Confirmer la suppression ?')">Supprimer</button>
                                 </form>
-                            </td>
+                            </td> -->
                         </tr>
                     @endforeach
                 </tbody>
