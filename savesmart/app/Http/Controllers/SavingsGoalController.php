@@ -25,17 +25,18 @@ class SavingsGoalController extends Controller
     // Enregistrer un nouvel objectif d'épargne
     public function store(Request $request)
     {
-        $request->validate([
-            'profile_id' => 'required|exists:profiles,id',
-            'name' => 'required|string|max:255',
-            'target_amount' => 'required|numeric|min:0',
-            'saved_amount' => 'nullable|numeric|min:0',
-            'deadline' => 'nullable|date'
-        ]);
+        dd($request);
+        // $request->validate([
+        //     'profile_id' => 'required|exists:profiles,id',
+        //     'name' => 'required|string|max:255',
+        //     'target_amount' => 'required|numeric|min:0',
+        //     'saved_amount' => 'nullable|numeric|min:0',
+        //     'deadline' => 'nullable|date|after_or_equal:today'
+        // ]);
 
-        SavingsGoal::create($request->all());
+        // SavingsGoal::create($request->all());
 
-        return redirect()->route('savings_goals.index')->with('success', 'Objectif ajouté avec succès.');
+        // return redirect()->route('savings_goals.index')->with('success', 'Objectif ajouté avec succès.');
     }
 
     // Afficher un objectif spécifique

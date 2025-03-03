@@ -57,6 +57,7 @@
                                 <input type="text" name="name" id="name" class="focus:ring-indigo-500 border-2 border-black-500 py-2 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="Ex: Achat maison, Vacances..." required>
                             </div>
                         </div>
+                        <input type="hidden" value="{{ session('current_profile') }}" name="profile_id" id="profile_id"  required>
 
                         <div>
                             <label for="target_amount" class="block text-sm font-medium text-gray-700">
