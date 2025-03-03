@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profiles/{profile}', [ProfileController::class, 'destroy'])->name('profiles.destroy'); // Suppression du profil
     Route::resource('categories', CategoryController::class);
     Route::get('/home/{profile}', [HomeController::class, 'index'])->name('home');
+    Route::get('/profilPersonnel/{profile}', [HomeController::class, 'affiche'])->name('profilePesronnel');
 });
 
 
