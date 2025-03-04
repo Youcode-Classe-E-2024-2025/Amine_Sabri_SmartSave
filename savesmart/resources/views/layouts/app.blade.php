@@ -16,6 +16,7 @@
             <ul class="navbar-nav flex items-center">
                 @auth
                     <li class="nav-item px-2"><a class="nav-link text-white" href="{{ route('profiles.index') }}">Home</a></li>
+                    <!-- <li class="nav-item px-2"><a class="nav-link text-white" ></a></li> -->
                     @if (session('current_profile') && (request()->routeIs('home') || request()->routeIs('profilePesronnel')))
                         <li class="nav-item px-2">
                             <a class="nav-link text-white" href="{{ route('profilePesronnel', session('current_profile')) }}">Profile personnel</a>
@@ -28,7 +29,7 @@
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="text-white border-2 border-white p-1 rounded"><i class="bi bi-box-arrow-right"></i>Déconnexion</button>
+                            <button type="submit" class="text-white border-2 border-white p-1 rounded">{{ session("CompteName") }}<i class="bi bi-box-arrow-right ml-2"></i></button>
                         </form>
                     </li>
                 @else
