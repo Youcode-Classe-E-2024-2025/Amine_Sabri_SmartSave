@@ -40,4 +40,7 @@ Route::middleware(['auth'])->group(function () {
 Route::resource('transactions', TransactionController::class);
 Route::resource('savings_goals', SavingsGoalController::class);
 
-Route::get('/export-goals', [SavingsGoalController::class, 'exportGoals'])->name('goals.export');
+// Route::get('/export-goals', [SavingsGoalController::class, 'exportGoals'])->name('goals.export');
+
+Route::get('/export-goals', [SavingsGoalController::class, 'exportGoals'])->name('exportGoals.all');
+Route::get('/profiles/{profile}/export-goals', [SavingsGoalController::class, 'exportGoals'])->name('exportGoals.profile');

@@ -11,7 +11,7 @@ class SavingsGoalController extends Controller
     // Afficher la liste des objectifs d'épargne
     public function index()
     {
-        $goals = SavingsGoal::all();
+        $goals = SavingsGoal::paginate(5);
         return view('savings_goals.index', compact('goals'));
     }
 
@@ -76,37 +76,44 @@ class SavingsGoalController extends Controller
     }
 
 
-    public function exportGoals()
-{
-    $goals = SavingsGoal::all(); // Récupère tous les objectifs
-
-    $csvFileName = 'goals_' . date('Y-m-d_H-i-s') . '.csv';
-
-    $headers = [
-        "Content-Type" => "text/csv",
-        "Content-Disposition" => "attachment; filename=$csvFileName"
-    ];
-
-    $callback = function () use ($goals) {
-        $file = fopen('php://output', 'w');
-
-        // Écrire l'en-tête du CSV
-        fputcsv($file, ['ID', 'Nom', 'Montant Objectif', 'Montant Épargné', 'Date de Création']);
-
-        // Écrire les données
-        foreach ($goals as $goal) {
-            fputcsv($file, [
-                $goal->id,
-                $goal->name,
-                $goal->target_amount,
-                $goal->saved_amount,
-                $goal->created_at
-            ]);
+    public function exportGoals(Request $request, Profile $profile = null)
+    {
+        // Vérifier si un profil spécifique est fourni
+        if ($profile) {
+            $goals = SavingsGoal::where('profile_id', $profile->id)->get();
+            $csvFileName = 'goals_profile_' . $profile->id . '_' . date('Y-m-d_H-i-s') . '.csv';
+        } else {
+            $goals = SavingsGoal::all();
+            $csvFileName = 'all_goals_' . date('Y-m-d_H-i-s') . '.csv';
         }
-
-        fclose($file);
-    };
-
-    return response()->streamDownload($callback, $csvFileName, $headers);
-}
+    
+        $headers = [
+            "Content-Type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=$csvFileName"
+        ];
+    
+        $callback = function () use ($goals) {
+            $file = fopen('php://output', 'w');
+    
+            // Écrire l'en-tête du CSV
+            fputcsv($file, ['ID', 'Nom', 'Montant Objectif', 'Montant Épargné', 'Date de Création', 'Profile ID']);
+    
+            // Écrire les données
+            foreach ($goals as $goal) {
+                fputcsv($file, [
+                    $goal->id,
+                    $goal->name,
+                    $goal->target_amount,
+                    $goal->saved_amount,
+                    $goal->created_at,
+                    $goal->profile_id
+                ]);
+            }
+    
+            fclose($file);
+        };
+    
+        return response()->streamDownload($callback, $csvFileName, $headers);
+    }
+    
 }
