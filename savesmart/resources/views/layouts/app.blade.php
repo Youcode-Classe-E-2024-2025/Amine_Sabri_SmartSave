@@ -17,7 +17,7 @@
                 @auth
                     <li class="nav-item px-2"><a class="nav-link text-white" href="{{ route('profiles.index') }}">Home</a></li>
                     <!-- <li class="nav-item px-2"><a class="nav-link text-white" ></a></li> -->
-                    @if (session('current_profile') && (request()->routeIs('home') || request()->routeIs('profilePesronnel')))
+                    @if (session('current_profile') && (request()->routeIs('home') || request()->routeIs('profilePesronnel')|| request()->routeIs('savings_goals.index')))
                         <li class="nav-item px-2">
                             <a class="nav-link text-white" href="{{ route('profilePesronnel', session('current_profile')) }}">Profile personnel</a>
                         </li>
