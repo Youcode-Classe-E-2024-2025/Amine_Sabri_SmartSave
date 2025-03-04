@@ -99,21 +99,54 @@
         </div>
 
         <!-- Charts Section -->
-        <div class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <div class="bg-white overflow-hidden shadow rounded-lg">
-                <div class="px-4 py-5 sm:p-6">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">Répartition Saving vs Objectif</h3>
-                    <div class="mt-4 h-64">
+        <div class="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
+            <!-- Pie Chart Card -->
+            <div class="bg-white overflow-hidden shadow-lg rounded-xl border border-gray-100">
+                <div class="px-6 py-5">
+                    <h3 class="text-lg font-semibold text-gray-800">Répartition Saving vs Objectif</h3>
+                    <div class="mt-6 h-64">
                         <canvas id="pieChart"></canvas>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white overflow-hidden shadow rounded-lg">
-                <div class="px-4 py-5 sm:p-6">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">Évolution des Transactions (Mensuel)</h3>
-                    <div class="mt-4 h-64">
-                        <canvas id="barChart"></canvas>
+            <!-- Budget Progress Card -->
+            <div class="bg-white overflow-hidden shadow-lg rounded-xl border border-gray-100">
+                <div class="px-6 py-5">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Budget Total</h3>
+                    <p class="text-3xl font-bold text-gray-800 mb-6">{{ number_format($totalAmount, 2) }} <span class="text-sm text-gray-500">MAD</span></p>
+                    
+                    <!-- Besoins (50%) -->
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-700">Besoins (50%)</span>
+                            <span class="text-sm font-medium text-gray-700">{{ number_format($budgetOptimization['besoins'], 2) }} MAD</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-3">
+                            <div class="bg-blue-500 h-3 rounded-full transition-all duration-500 ease-in-out" style="width: 50%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Envies (30%) -->
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-700">Envies (30%)</span>
+                            <span class="text-sm font-medium text-gray-700">{{ number_format($budgetOptimization['envies'], 2) }} MAD</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-3">
+                            <div class="bg-purple-500 h-3 rounded-full transition-all duration-500 ease-in-out" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Épargne (20%) -->
+                    <div class="mb-2">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-700">Épargne (20%)</span>
+                            <span class="text-sm font-medium text-gray-700">{{ number_format($budgetOptimization['epargne'], 2) }} MAD</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-3">
+                            <div class="bg-green-500 h-3 rounded-full transition-all duration-500 ease-in-out" style="width: 20%"></div>
+                        </div>
                     </div>
                 </div>
             </div>
