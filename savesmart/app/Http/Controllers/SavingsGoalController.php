@@ -74,4 +74,39 @@ class SavingsGoalController extends Controller
         $savingsGoal->delete();
         return redirect()->route('savings_goals.index')->with('success', 'Objectif supprimé avec succès.');
     }
+
+
+    public function exportGoals()
+{
+    $goals = SavingsGoal::all(); // Récupère tous les objectifs
+
+    $csvFileName = 'goals_' . date('Y-m-d_H-i-s') . '.csv';
+
+    $headers = [
+        "Content-Type" => "text/csv",
+        "Content-Disposition" => "attachment; filename=$csvFileName"
+    ];
+
+    $callback = function () use ($goals) {
+        $file = fopen('php://output', 'w');
+
+        // Écrire l'en-tête du CSV
+        fputcsv($file, ['ID', 'Nom', 'Montant Objectif', 'Montant Épargné', 'Date de Création']);
+
+        // Écrire les données
+        foreach ($goals as $goal) {
+            fputcsv($file, [
+                $goal->id,
+                $goal->name,
+                $goal->target_amount,
+                $goal->saved_amount,
+                $goal->created_at
+            ]);
+        }
+
+        fclose($file);
+    };
+
+    return response()->streamDownload($callback, $csvFileName, $headers);
+}
 }
