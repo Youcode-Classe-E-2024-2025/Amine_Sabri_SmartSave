@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2 class="text-center text-5xl font-bold mb-3.5">Vos Profils</h2>
+    <h2 class="text-center md:text-left text-5xl font-extrabold text-blue-600 mt-10 md:mb-0">Vos Profils</h2>
     <ul class="  flex items-center justify-center mx-48 flex-wrap ">
         @foreach ($profiles as $profile)
         <li class="flex items-center flex-col w-fit  p-4 rounded-lg mt-10 relative">
