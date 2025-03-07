@@ -46,7 +46,7 @@
                             <dl>
                                 <dt class="text-sm font-medium text-gray-500 truncate">Total Transactions</dt>
                                 <dd class="flex items-baseline">
-                                    <div class="text-2xl font-semibold text-gray-900">{{ $totalAmount }}</div>
+                                    <div class="text-2xl font-semibold text-gray-900">{{  number_format($totalAmount, 2)}}</div>
                                 </dd>
                             </dl>
                         </div>
@@ -65,7 +65,7 @@
                             <dl>
                                 <dt class="text-sm font-medium text-gray-500 truncate">objectifs financiers</dt>
                                 <dd class="flex items-baseline">
-                                    <div class="text-2xl font-semibold text-gray-900">{{ $objectifinanciers->target_amount ?? ""}} </div>
+                                    <div class="text-2xl font-semibold text-gray-900">{{number_format($objectifinanciers->target_amount ?? "", 2)}} </div>
                                     <div class="ml-2 flex items-baseline text-sm font-semibold text-red-600">
                                      
                                     </div>
@@ -88,7 +88,7 @@
                             <dl>
                                 <dt class="text-sm font-medium text-gray-500 truncate">Dernière Transaction</dt>
                                 <dd class=" items-baseline">
-                                    <div class="text-2xl font-semibold text-gray-900">{{ $lastTransaction->amount ?? 0 }}</div>
+                                    <div class="text-2xl font-semibold text-gray-900">{{ number_format($lastTransaction->amount ?? 0, 2) }}</div>
                                     <span class="text-[12px] text-gray-600">Par: {{ $lastTransaction->profile->name ?? ''}}</span>
                                 </dd>
                             </dl>
@@ -191,8 +191,14 @@
                                         {{ $transaction->type }}
                                     </span>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                    {{ number_format($transaction->amount, 2) }} MAD
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium 
+                                    @if($transaction->type == 'Revenu') text-green-600 @else text-red-600 @endif">
+                                    
+                                    @if($transaction->type == 'Revenu') 
+                                        +{{ number_format($transaction->amount, 2) }} MAD
+                                    @else 
+                                        -{{ number_format($transaction->amount, 2) }} MAD
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     {{ $transaction->category->name ?? 'Non catégorisé' }}

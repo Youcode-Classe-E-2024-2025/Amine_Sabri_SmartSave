@@ -32,7 +32,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('login')->with('success', 'Inscription réussie !');
+        return redirect()->route('login.showLoginForm')->with('success', 'Inscription réussie !');
     }
 
     // Afficher le formulaire de connexion

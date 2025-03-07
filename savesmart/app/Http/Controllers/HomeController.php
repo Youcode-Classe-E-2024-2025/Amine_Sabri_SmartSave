@@ -14,7 +14,15 @@ class HomeController extends Controller
         // dd($profile->id);
         $transactions = Transaction::paginate(5);
         // $transactions = Transaction::where('profile_id',$profile->id)->paginate(5);
-        $totalAmount = Transaction::sum('amount');
+        // $totalAmount = Transaction::sum('amount');
+
+
+        $totalExpenses = Transaction::where('type', 'Dépense')->sum('amount');
+
+        $totalRevenue = Transaction::where('type', 'Revenu')->sum('amount');
+
+        // Calcul du solde final
+        $totalAmount = $totalRevenue - $totalExpenses;
         // $totalAmount = Transaction::where('profile_id', $profile->id)->sum('amount');
         $lastTransaction = Transaction::latest()->first();
         // $lastTransaction = Transaction::where('profile_id', $profile->id)->latest()->first();

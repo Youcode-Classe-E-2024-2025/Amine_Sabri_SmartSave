@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SavingsGoalController;
+use App\Http\Controllers\HomeController;
 
 
 
@@ -21,7 +22,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 
 
 
-use App\Http\Controllers\HomeController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profiles', [ProfileController::class, 'index'])->name('profiles.index');
@@ -33,15 +33,19 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::get('/home/{profile}', [HomeController::class, 'index'])->name('home');
     Route::get('/profilPersonnel/{profile}', [HomeController::class, 'affiche'])->name('profilePesronnel');
+
+
+    Route::resource('transactions', TransactionController::class);
+    Route::resource('savings_goals', SavingsGoalController::class)->names(['index'   => 'savings_goals.index',]);
+
+
+    Route::get('/export-goals', [SavingsGoalController::class, 'exportGoals'])->name('exportGoals.all');
+    Route::get('/profiles/{profile}/export-goals', [SavingsGoalController::class, 'exportGoals'])->name('exportGoals.profile');
 });
 
 
 
-Route::resource('transactions', TransactionController::class);
-Route::resource('savings_goals', SavingsGoalController::class)->names(['index'   => 'savings_goals.index',]);
 
 // Route::get('/export-goals', [SavingsGoalController::class, 'exportGoals'])->name('goals.export');
 
 
-Route::get('/export-goals', [SavingsGoalController::class, 'exportGoals'])->name('exportGoals.all');
-Route::get('/profiles/{profile}/export-goals', [SavingsGoalController::class, 'exportGoals'])->name('exportGoals.profile');
