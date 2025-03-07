@@ -62,6 +62,9 @@ Ce projet s’inscrit dans un cursus de niveau intermédiaire, alliant la mise e
 - **MySQL** *(Base de données)*  
 - **Bootstrap / Tailwind CSS** *(UI/UX)*  
 - **Chart.js** *(Visualisation des données)*  
-- **GitHub Projects** *(Gestion du projet Agile)*  
+- **GitHub Projects** *(Gestion du projet Agile)*
+
+# UML SaveSmart 
+![UML SaveSmart](https://github.com/user-attachments/assets/18bc6768-3fda-4620-9681-ce0c3cb7646d)
 
 📌 *Ce projet suit une approche centrée sur l’utilisateur et vise à fournir une expérience intuitive et efficace pour la gestion des finances personnelles.*  
