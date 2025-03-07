@@ -114,7 +114,7 @@
             <div class="bg-white overflow-hidden shadow-lg rounded-xl border border-gray-100">
                 <div class="px-6 py-5">
                     <h3 class="text-lg font-semibold text-gray-800 mb-4">Budget Total</h3>
-                    <p class="text-3xl font-bold text-gray-800 mb-6">{{ number_format($totalAmount, 2) }} <span class="text-sm text-gray-500">MAD</span></p>
+                    <p class="text-3xl font-bold text-gray-800 mb-6">{{ number_format($totalAmount , 2) }} <span class="text-sm text-gray-500">MAD</span></p>
                     
                     <!-- Besoins (50%) -->
                     <div class="mb-6">
